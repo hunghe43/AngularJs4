@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="app">
+
+    <div ng-controller="controller">
+        nhập tên:<input type="text" ng-model="employee.name" />
+        nhập tuổi:<input type="text" ng-model="employee.age" />
+        nhập đại chỉ:<input type="text" ng-model="employee.adress "/>
+        <h1>Tên: {{employee.name}}</h1>
+        <p>Tuổi: {{employee.age}}</p>
+        <p>Địa chỉ: {{employee.adress}}</p>
+    </div>
+</body>
+</html>

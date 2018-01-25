@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="controller">
+        <h1>repeat</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>Tên</td>
+                    <td>Tuổi</td>
+                    <td>Địa chỉ</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in employees">
+                    <td>{{item.name}}</td>
+                    <td>{{item.age}}</td>
+                    <td>{{item.adress}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>nested-repeat</h1>
+    <div ng-controller="controller-nested">
+        <ul ng-repeat="item in countries">
+            <li>
+                {{item.name}}-index{{$index}}
+                <ul ng-repeat="city in item.cities">
+                    <li>
+                        {{city.name}}-index{{$index}} and parent_index{{$parent.$index}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

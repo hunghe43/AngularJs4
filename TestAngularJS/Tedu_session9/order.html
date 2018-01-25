@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="controller">
+        <h1>filter</h1>
+        show record: <input type="number" ng-model="limitRow" />
+        filter record: <select ng-model="sort">
+            <option value="name">Name ACS</option>
+            <option value="birthday">birthday ACS</option>
+            <option value="salary">salary ACS</option>
+            <option value="-name">Name DESC</option>
+            <option value="-birthday">birthday DESC</option>
+            <option value="-salary">salary DESC</option>
+        </select>
+        <table>
+            <thead>
+                <tr>
+                    <td>Tên</td>
+                    <td>Ngày sinh</td>
+                    <td>Thu nhập</td>
+                    <td>Giới Tính</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in employees|limitTo:limitRow|orderBy:sort">
+                    <td>{{item.name|uppercase}}</td>
+                    <td>{{item.birthday | date:"dd/MM/yyyy"}}</td>
+                    <td>{{item.salary|currency:""}}</td>
+                    <td>{{item.gender}}</td>
+                    <td>{{item.status|status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
