@@ -12,8 +12,28 @@ app.controller('controller', function ($scope) {
         { name: 'hungf', birthday: new Date("01/22/1994"), salary: 1100000, gender: 'Male', status: true },
     ];
     $scope.employees = employees;
-    $scope.sort = 'name';
+    $scope.sortColumn = 'name';
+    $scope.reverse = false;
     $scope.limitRow = 5;
+
+    //using directive sort
+    $scope.sortData = function (column) {
+        if ($scope.sortColumn == column)
+            $scope.reverse = !$scope.reverse;
+        else
+            $scope.reverse = false;
+        $scope.sortColumn = column;        
+    };
+    $scope.getSortClass = function (column) {
+        if ($scope.sortColumn == column) {
+            return $scope.reverse ? 'arrow-up' : 'arrow-down';
+        }
+        return '';
+    }
+    //using directive filter
+    $scope.searchText = '';
+    //using directive hide-show:
+    $scope.hideSalary = false;
 });
 app.filter('status', function () {
     return function (input) {

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        table thead tr {
+            cursor: pointer;
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid black;
+            display: inline-block;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body ng-app="app">
+    <div ng-controller="controller">
+        <h1>get data from service using angularJs</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Tên</td>
+                    <td>ngày sinh</td>
+                    <td>thu nhập</td>
+                    <td>giới tính</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in employees">
+                    <td>{{item.name|uppercase}}</td>
+                    <td>{{item.birthday | date:"dd/MM/yyyy"}}</td>
+                    <td>{{item.salary|currency:""}}</td>
+                    <td>{{item.gender}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

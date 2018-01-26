@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        table thead tr {
+            cursor: pointer;
+        }
+
+        .arrow-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid black;
+            display: inline-block;
+        }
+
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body ng-app="app">
+    <div ng-controller="controller">
+        <input type="text" ng-model="searchText" />
+        <h1>filter deafaul</h1>
+        show record: <input type="number" ng-model="limitRow" />
+        filter record: <select ng-model="sortColumn">
+            <option value="name">Name ACS</option>
+            <option value="birthday">birthday ACS</option>
+            <option value="salary">salary ACS</option>
+            <option value="-name">Name DESC</option>
+            <option value="-birthday">birthday DESC</option>
+            <option value="-salary">salary DESC</option>
+        </select>
+        <label>
+            <input type="checkbox" ng-model="hideSalary"/>Hide salary
+        </label>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Tên</td>
+                    <td>Ngày sinh</td>
+                    <td ng-hide="hideSalary">Thu nhập</td>
+                    <td ng-show="hideSalary">Thu nhập</td>
+                    <td>Giới Tính</td>
+                    <td>Trạng thái</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in employees|limitTo:limitRow|orderBy:sortColumn|filter:searchText">
+                    <td>{{item.name|uppercase}}</td>
+                    <td>{{item.birthday | date:"dd/MM/yyyy"}}</td>
+                    <td ng-hide="hideSalary">{{item.salary|currency:""}}</td>
+                    <td ng-show="hideSalary" >xxxxxxx</td>
+                    <td>{{item.gender}}</td>
+                    <td>{{item.status|status}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h1>filter click header table</h1>
+        filter record: <select ng-model="sortColumn">
+            <option value="name">Name ACS</option>
+            <option value="birthday">birthday ACS</option>
+            <option value="salary">salary ACS</option>
+            <option value="-name">Name DESC</option>
+            <option value="-birthday">birthday DESC</option>
+            <option value="-salary">salary DESC</option>
+        </select>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td ng-click="sortData('name')">Tên<div ng-class="getSortClass('name')"></div></td>
+                    <td ng-click="sortData('birthday')">Ngày sinh<div ng-class="getSortClass('birthday')"></div></td>
+                    <td ng-hide="hideSalary" ng-click="sortData('salary')">Thu nhập<div ng-class="getSortClass('salary')"></div></td>
+                    <td ng-show="hideSalary" ng-click="sortData('salary')">Thu nhập<div ng-class="getSortClass('salary')"></div></td>
+                    <td ng-click="sortData('gender')">Giới Tính<div ng-class="getSortClass('gender')"></div></td>
+                    <td ng-click="sortData('status')">Trạng thái<div ng-class="getSortClass('status')"></div></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in employees|orderBy:sortColumn:reverse|filter:searchText">
+                    <td>{{item.name|uppercase}}</td>
+                    <td>{{item.birthday | date:"dd/MM/yyyy"}}</td>
+                    <td ng-hide="hideSalary">{{item.salary|currency:""}}</td>
+                    <td ng-show="hideSalary">xxxxxxx</td>
+                    <td>{{item.gender}}</td>
+                    <td>{{item.status|status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
